@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_DB: evamed_total
+      POSTGRES_USER: myprojectuser
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./backend/evamed-api/backup2025.dump:/docker-entrypoint-initdb.d/backup.dump:ro
+      - ./backend/evamed-api/docker/postgres/initdb/01-restore.sh:/docker-entrypoint-initdb.d/01-restore.sh:ro
+
+  api:
+    build: ./backend/evamed-api
+    environment:
+      DB_NAME: evamed_total
+      DB_USER: myprojectuser
+      DB_PASSWORD: password
+      DB_HOST: db
+      DB_PORT: "5432"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  web:
+    build: ./frontend/evamed
+    environment:
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+
+volumes:
+  db_data:
