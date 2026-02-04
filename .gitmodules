@@ -1,3 +1,6 @@
 [submodule "frontend/evamed"]
 	path = frontend/evamed
 	url = https://github.com/AustenLynn/evamed
+[submodule "backend/evamed-api"]
+	path = backend/evamed-api
+	url = https://github.com/AustenLynn/evamed-api
