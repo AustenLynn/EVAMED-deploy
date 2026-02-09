@@ -36,7 +36,7 @@ docker compose up --build
 
 ## Base de datos (restore automático en primer arranque)
 
-El dump se restaura automáticamente **solo en el primer arranque**, usando `backup2025.dump`.
+El dump se restaura automáticamente **solo en el primer arranque**, usando `backup`.
 Si la base ya existe, Postgres no ejecuta el script de inicialización.
 
 Para forzar la restauración (esto borra los datos actuales):
