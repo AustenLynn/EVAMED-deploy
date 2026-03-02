@@ -13,6 +13,7 @@ services:
 
   api:
     build: ./backend/evamed-api
+    command: sh -c "python manage.py migrate && gunicorn profiles_project.wsgi:application --bind 0.0.0.0:8000"
     environment:
       DB_NAME: evamed_total
       DB_USER: myprojectuser
